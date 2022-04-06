@@ -35,11 +35,18 @@
 
     <script>
         function updateTime() {
-            wednesdayIdx = 3
+            var wednesdayIdx = 3
+            var TuscoloTime = 12
             var now = new Date()
             var nextWednesday = new Date();
-            nextWednesday.setDate(now.getDate() + (wednesdayIdx + (7 - now.getDay())) % 7);
-            nextWednesday.setHours(12)
+            
+            if (now.getDay() == wednesdayIdx && now.getHours() >= TuscoloTime) {
+                nextWednesday.setDate(now.getDate() + 7);
+            } else {
+                nextWednesday.setDate(now.getDate() + (wednesdayIdx + (7 - now.getDay())) % 7);
+            }
+
+            nextWednesday.setHours(TuscoloTime)
             nextWednesday.setMinutes(0)
             nextWednesday.setSeconds(0)
     
