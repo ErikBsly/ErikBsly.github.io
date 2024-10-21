@@ -28,29 +28,29 @@
 
 <body>
     <main>
-        <p>Zeit bis Tuscolo</p>
+        <p>Zeit bis Nenillo</p>
         <p id="HoursLeft">00:00:00</p>
     </main>
 
 
     <script>
         function updateTime() {
-            var wednesdayIdx = 3
-            var TuscoloTime = 12
-            var now = new Date()
-            var nextWednesday = new Date();
+            var dayIdx = 2;
+            var event_time = 18;
+            var now = new Date();
+            var nextDay = new Date();
             
-            if (now.getDay() == wednesdayIdx && now.getHours() >= TuscoloTime) {
-                nextWednesday.setDate(now.getDate() + 7);
+            if (now.getDay() == dayIdx && now.getHours() >= event_time) {
+                nextDay.setDate(now.getDate() + 7);
             } else {
-                nextWednesday.setDate(now.getDate() + (wednesdayIdx + (7 - now.getDay())) % 7);
+                nextDay.setDate(now.getDate() + (dayIdx + (7 - now.getDay())) % 7);
             }
 
-            nextWednesday.setHours(TuscoloTime)
-            nextWednesday.setMinutes(0)
-            nextWednesday.setSeconds(0)
+            nextDay.setHours(event_time)
+            nextDay.setMinutes(0)
+            nextDay.setSeconds(0)
     
-            var diff = (nextWednesday - now) / 1000 // seconds
+            var diff = (nextDay - now) / 1000 // seconds
             var diff_str = Math.floor(diff/3600).toString().padStart(2, "0") + ":" + Math.floor((diff % 3600) / 60).toString().padStart(2, "0") + ":" + Math.round(diff % 60).toString().padStart(2, "0")
             
             document.getElementById("HoursLeft").innerHTML = diff_str;
