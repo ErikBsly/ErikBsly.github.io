@@ -1,0 +1,15 @@
+{
+  "name": "bibtex2wordxml",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "bibtex2wordxml_bg.wasm",
+    "bibtex2wordxml.js",
+    "bibtex2wordxml.d.ts"
+  ],
+  "main": "bibtex2wordxml.js",
+  "types": "bibtex2wordxml.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
