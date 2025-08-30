@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BibTeX → Word XML (WASM)</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --fg: #111827;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #d1d5db;
+      --radius: 0.5rem;
+      --font: system-ui, sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+    main {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin: 0 0 0.5rem;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      font-family: monospace;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      resize: vertical;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: var(--accent-hover);
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    #xml_out {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>BibTeX → Word XML Converter</h1>
+
+    <div class="section">
+      <label for="bib">Paste your BibTeX entries:</label>
+      <textarea id="bib" rows="10" placeholder="@article{...}"></textarea>
+    </div>
+
+    <label><input type="checkbox" id="includeId" /> Include BibTeX key in GUID</label>
+    <button id="go">Convert</button>
+
+    <div class="section">
+      <label for="xml_out">Generated Word XML:</label>
+      <textarea id="xml_out" readonly></textarea>
+    </div>
+  </main>
+
+  <script type="module">
+    import init, { convert } from "./pkg/bibtex2wordxml.js";
+    await init();
+    document.getElementById('go').onclick = () => {
+      const bib = document.getElementById('bib').value;
+      const includeId = document.getElementById('includeId').checked;
+      const xml = convert(bib, includeId);
+      document.getElementById('xml_out').value = xml;
+    };
+  </script>
+</body>
+</html>
